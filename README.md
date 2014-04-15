@@ -48,39 +48,44 @@ I'm sorry, but it still isn't available as a Maven dependency.
 
 ####Example of how to use it on an XML code:
 
-    <org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/navigation_drawer_container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:list_paddingTop="?android:actionBarSize"
-    app:drawer_gravity="start"
-    app:list_mainSectionsEntries="@array/navigation_main_sections"
-    app:list_secondarySectionsEntries="@array/navigation_secondary_sections"
-    app:list_mainSectionsDrawables="@array/drawable_ids"
-    app:list_secondarySectionsDrawables="@array/drawable_ids">
+```xml
+<org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:id="@+id/navigation_drawer_container"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+app:list_paddingTop="?android:actionBarSize"
+app:drawer_gravity="start"
+app:list_mainSectionsEntries="@array/navigation_main_sections"
+app:list_secondarySectionsEntries="@array/navigation_secondary_sections"
+app:list_mainSectionsDrawables="@array/drawable_ids"
+app:list_secondarySectionsDrawables="@array/drawable_ids">
 
-      <FrameLayout
-          android:id="@+id/content_layout"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"/>
+  <FrameLayout
+      android:id="@+id/content_layout"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"/>
 
-    </org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer>
+</org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer>
+```
 
 You may think *'Ok, so where's the menu?'*. Well, the GoogleNavigationDrawer class itself contains it and handles it so you don't have to manually modify it. You can customize it, though, you can find that info in **Section 4**.
 
-All the ```app:*``` attributes are optional, but if you don't provide any entries you will have to do it later in code with ```drawer.setListViewSections(...)```.
+All the `app:*` attributes are optional, but if you don't provide any entries you will have to do it later in code with `drawer.setListViewSections(...)`.
 
 ####Using GoogleNavigationDrawer in Java Code:
 
-    GoogleNavigationDrawer drawer = new GoogleNavigationDrawer(context);
-    // Here we are providing data to the adapter of the ListView
-    drawer.setListViewSections(new String[]{"Section A", "Section B"}, // Main sections
-            new String[]{"Settings"}, // Secondary sections
-            new int[]{R.drawable.ic_launcher}, // Main sections icon ids
-            null); // Secondary sections icon ids
-    this.addView(drawer);
+```java
+GoogleNavigationDrawer drawer = new GoogleNavigationDrawer(context);
+// Here we are providing data to the adapter of the ListView
+drawer.setListViewSections(new String[]{"Section A", "Section B"}, // Main sections
+        new String[]{"Settings"}, // Secondary sections
+        new int[]{R.drawable.ic_launcher}, // Main sections icon ids
+        null); // Secondary sections icon ids
+this.addView(drawer);
+```
+
 
 GoogleNavigationDrawer extends DrawerLayout. This means you can use DrawerLayout methods and set a DrawerListener to it.
 
@@ -88,63 +93,73 @@ GoogleNavigationDrawer extends DrawerLayout. This means you can use DrawerLayout
 
  As you cannot access the inner ListView to ensure encapsulation, additional methods have been provided so you can do it by code. This methods are:
 
-     public boolean isDrawerMenuOpen();
+```java
+public boolean isDrawerMenuOpen();
 
-     public void openDrawerMenu();
+public void openDrawerMenu();
 
-     public void closeDrawerMenu();
+public void closeDrawerMenu();
+```
 
 Also, to handle section selections, a listener has been provided:
 
-    public void setOnNavigationSectionSelected(OnNavigationSectionSelected listener);
+```java
+public void setOnNavigationSectionSelected(OnNavigationSectionSelected listener);
+```
 
 
 ###4. Customizing the inner ListView:
 
  Finally, customization. The main XML attributes of the class are the following:
 
-    app:list_padding[Top, Bottom, Left, Right]="dimen"
-    app:drawer_gravity="start"
-    app:list_mainSectionsEntries="array"
-    app:list_secondarySectionsEntries="array"
-    app:list_mainSectionsDrawables="array"
-    app:list_secondarySectionsDrawables="array"
-    app:list_headerView="layout"
-    app:list_footerView="layout"
-    app:list_mainSectionsBackground="drawable"
-    app:list_secondarySectionsBackground="drawable"
+```xml
+app:list_padding[Top, Bottom, Left, Right]="dimen"
+app:drawer_gravity="start"
+app:list_mainSectionsEntries="array"
+app:list_secondarySectionsEntries="array"
+app:list_mainSectionsDrawables="array"
+app:list_secondarySectionsDrawables="array"
+app:list_headerView="layout"
+app:list_footerView="layout"
+app:list_mainSectionsBackground="drawable"
+app:list_secondarySectionsBackground="drawable"
+```
 
 
 Example of *arrays* in ```arrays.xml```:
 
-    <?xml version="1.0" encoding="utf-8"?>
-    <resources>
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
 
-        <string-array name="navigation_main_sections">
-            <item>Home</item>
-            <item>Some Other</item>
-        </string-array>
+    <string-array name="navigation_main_sections">
+        <item>Home</item>
+        <item>Some Other</item>
+    </string-array>
 
-        <string-array name="navigation_secondary_sections">
-            <item>Settings</item>
-            <item>Info</item>
-        </string-array>
+    <string-array name="navigation_secondary_sections">
+        <item>Settings</item>
+        <item>Info</item>
+    </string-array>
 
-        <array name="drawable_ids">
-            <item>@drawable/ic_home</item>
-            <item>@drawable/ic_other</item>
-        </array>
+    <array name="drawable_ids">
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_other</item>
+    </array>
 
-    </resources>
+</resources>
+```
 
 Also, both icon drawables and backgrounds **should have checked states** to keep them consistent with the rest of the library:
 
-    <?xml version="1.0" encoding="utf-8"?>
+```xml
+<?xml version="1.0" encoding="utf-8"?>
 
-    <selector xmlns:android="http://schemas.android.com/apk/res/android">
-        <item android:state_checked="true" android:drawable="@drawable/ic_on"></item>
-        <item android:drawable="@drawable/ic_off"></item>
-    </selector>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true" android:drawable="@drawable/ic_on"></item>
+    <item android:drawable="@drawable/ic_off"></item>
+</selector>
+```
 
 All these attributes can also be set by code.
 
