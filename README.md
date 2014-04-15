@@ -50,6 +50,7 @@ With GoogleNavigationDrawerMenu you can:
   Notice the ```flatDir``` local maven repository created. It will load any .aar file found in that directory.
 
 **Maven dependency:**
+
 Declare it into your build.gradle
 
     dependencies{
