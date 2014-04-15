@@ -8,11 +8,11 @@ This project aims to let you use a ListView menu similar to the one in the new G
 
 With GoogleNavigationDrawerMenu you can:
 
-  * Set a GoogleApp-styled DrawerLayout menu and only have to specify the main content for your app, you no longer have set the ListView and its styles. Everything is handler by the **GoogleNavigationDrawer** class.
+  * Set a GoogleApp-styled DrawerLayout menu and only have to specify the main content for your app, you no longer have set the ListView and its styles. Everything is handled by the **GoogleNavigationDrawer** class.
   * Set main and secondary sections to the menu.
   * Set a list of icons for those sections (optional).
   * Both text and icons remain selected when you click on them.
-  * Set an *OnSectionSelectedListener* so you can handle section selection events.
+  * Set an *OnNavigationSectionSelected* listener so you can handle section selection events.
   * Change the background of the list items.
   * Set a header and footer to the inner ListView.
 
@@ -22,8 +22,7 @@ With GoogleNavigationDrawerMenu you can:
 
   **Manually (Option A):**
 
-  Download the source code and import ```GoogleNavigationDrawerMenu``` folder as a Library Module in Android Studio or as a Project in Eclipse (still not tested).
-
+  Download the source code and import ```GoogleNavigationDrawerMenuLibrary``` folder as a Library Module in Android Studio or as a Project in Eclipse (still not tested).
 
   **Manually (Option B):**
 
@@ -38,7 +37,9 @@ With GoogleNavigationDrawerMenu you can:
           }
         }
 
-  Notice the ```flatDir``` local maven repository created. It will load any .aar file found in that directory.
+  Notice the ```flatDir``` local maven repository created. Now you will have to add the aar file to the *dependencies* list, as if you were adding it from Maven Central Repository:
+
+        compile 'com.arasthel:gnavdrawer-library:1.0.0'
 
 **Maven dependency:**
 

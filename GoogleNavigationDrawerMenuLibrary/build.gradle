@@ -34,4 +34,5 @@ task jar(type: Jar) {
     from sourceSets.main.java
 }
 
-apply from: '../maven_push.gradle'
+// Script to upload plugin to Maven
+//apply from: '../maven_push.gradle'
