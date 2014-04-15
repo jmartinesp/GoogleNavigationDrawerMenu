@@ -2,7 +2,7 @@
 
 This project aims to let you use a ListView menu similar to the one in the new Google Apps (Keep, Play Music...) without having to do any extra effort. Sorry for the long name, though.
 
-![Screenshot](http://arasthel.com/project-images/gnavdrawer-example.jpg)
+![Screenshot](GoogleNavigationDrawer.jpg)
 
 ## Features
 
@@ -113,6 +113,38 @@ Also, to handle section selections, a listener has been provided:
     app:list_footerView="layout"
     app:list_mainSectionsBackground="drawable"
     app:list_secondarySectionsBackground="drawable"
+
+
+Example of *arrays* in ```arrays.xml```:
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <resources>
+
+        <string-array name="navigation_main_sections">
+            <item>Home</item>
+            <item>Some Other</item>
+        </string-array>
+
+        <string-array name="navigation_secondary_sections">
+            <item>Settings</item>
+            <item>Info</item>
+        </string-array>
+
+        <array name="drawable_ids">
+            <item>@drawable/ic_home</item>
+            <item>@drawable/ic_other</item>
+        </array>
+
+    </resources>
+
+Also, both icon drawables and backgrounds **should have checked states** to keep them consistent with the rest of the library:
+
+    <?xml version="1.0" encoding="utf-8"?>
+
+    <selector xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:state_checked="true" android:drawable="@drawable/ic_on"></item>
+        <item android:drawable="@drawable/ic_off"></item>
+    </selector>
 
 All these attributes can also be set by code.
 
