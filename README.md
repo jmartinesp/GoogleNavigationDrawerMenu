@@ -50,8 +50,11 @@ With GoogleNavigationDrawerMenu you can:
   Notice the ```flatDir``` local maven repository created. It will load any .aar file found in that directory.
 
 **Maven dependency:**
+Declare it into your build.gradle
 
-I'm sorry, but it still isn't available as a Maven dependency.
+    dependencies{
+        compile 'com.arasthel:gnavdrawer-library:1.0.0'
+    }
 
 ###2. Use class in XML or code:
 
