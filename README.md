@@ -2,6 +2,8 @@
 
 This project aims to let you use a ListView menu similar to the one in the new Google Apps (Keep, Play Music...) without having to do any extra effort. Sorry for the long name, though.
 
+![Screenshot](http://arasthel.com/project-images/gnavdrawer-example.jpg)
+
 ## Features
 
 With GoogleNavigationDrawerMenu you can:
@@ -16,9 +18,7 @@ With GoogleNavigationDrawerMenu you can:
 
 ## How to use
 
-  ###1. Include the library:
-
-
+###1. Include the library:
 
   **Manually (Option A):**
 
@@ -44,7 +44,7 @@ With GoogleNavigationDrawerMenu you can:
 
 I'm sorry, but it still isn't available as a Maven dependency.
 
-  ###2. Use class in XML or code:
+###2. Use class in XML or code:
 
 ####Example of how to use it on an XML code:
 
@@ -84,7 +84,7 @@ All the ```app:*``` attributes are optional, but if you don't provide any entrie
 
 GoogleNavigationDrawer extends DrawerLayout. This means you can use DrawerLayout methods and set a DrawerListener to it.
 
- ###3. Handling selection, opening and closing of the menu:
+###3. Handling selection, opening and closing of the menu:
 
  As you cannot access the inner ListView to ensure encapsulation, additional methods have been provided so you can do it by code. This methods are:
 
@@ -99,7 +99,7 @@ Also, to handle section selections, a listener has been provided:
     public void setOnNavigationSectionSelected(OnNavigationSectionSelected listener);
 
 
- ###4. Customizing the inner ListView:
+###4. Customizing the inner ListView:
 
  Finally, customization. The main XML attributes of the class are the following:
 
