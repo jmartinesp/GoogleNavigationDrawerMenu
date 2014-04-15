@@ -101,8 +101,10 @@ drawer.setListViewSections(new String[]{"Section A", "Section B"}, // Main secti
         new int[]{R.drawable.ic_launcher}, // Main sections icon ids
         null); // Secondary sections icon ids
 // To work correctly, a DrawerLayout must be the only View in a ViewGroup
-container.clear();
+container.removeAllViews();
 container.addView(drawer);
+// Now we add the content to the drawer since the menu is already there
+drawer.addView(contentView);
 ```
 
 
