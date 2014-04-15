@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="navigation_main_sections">
+        <item>Home</item>
+        <item>Some Other</item>
+    </string-array>
+
+    <string-array name="navigation_secondary_sections">
+        <item>Settings</item>
+        <item>Info</item>
+    </string-array>
+
+    <array name="drawable_ids">
+        <item>@drawable/ic_action_accept</item>
+        <item>@drawable/ic_action_cancel</item>
+    </array>
+
+</resources>

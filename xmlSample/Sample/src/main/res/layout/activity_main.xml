@@ -1,0 +1,26 @@
+<org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/navigation_drawer_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:list_paddingTop="?android:actionBarSize"
+        app:drawer_gravity="start"
+        app:list_mainSectionsEntries="@array/navigation_main_sections"
+        app:list_secondarySectionsEntries="@array/navigation_secondary_sections"
+        app:list_mainSectionsDrawables="@array/drawable_ids"
+        app:list_secondarySectionsDrawables="@array/drawable_ids">
+
+    <FrameLayout
+            android:id="@+id/content_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Google Navigation Drawer Sample"
+                android:id="@+id/sampleTextView"/>
+    </FrameLayout>
+
+</org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer>

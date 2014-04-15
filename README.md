@@ -35,7 +35,7 @@ With GoogleNavigationDrawerMenu you can:
 
   **Manually (Option B):**
 
-  * Download the AAR.
+  * Download the [AAR](raw/master/aars/GoogleNavigationDrawerMenu.aar).
   * Put it in the ```aars``` folder of your Android Studio project.
   * Add a File Dependency or add it to the ```build.gradle``` of your main Module, like this:
 
@@ -50,14 +50,15 @@ With GoogleNavigationDrawerMenu you can:
 
         compile 'com.arasthel:gnavdrawer-library:1.0.0'
 
-**Maven dependency:**
 
-Add this to your Application Module's `build.gradle`:
+**Automatic (Gradle):**
 
-    dependencies {
-      ...
-      compile 'com.arasthel:gnavdrawer-library:1.0.0'
-      ...
+Add it to your Application Module's `build.gradle`:
+
+Declare it into your build.gradle
+
+    dependencies{
+        compile 'com.arasthel:gnavdrawer-library:1.0.0'
     }
 
 ###2. Use class in XML or code:
@@ -86,7 +87,7 @@ app:list_secondarySectionsDrawables="@array/drawable_ids">
 </org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer>
 ```
 
-You may think *'Ok, so where's the menu?'*. Well, the GoogleNavigationDrawer class itself contains it and handles it so you don't have to manually modify it. You can customize it, though, you can find that info in **Section 4**.
+You may think *'Ok, so where's the menu?'*. Well, the GoogleNavigationDrawer class itself contains it and handles it so you don't have to manually modify it. You can customize it, though, you can find that info in [**Customizing Section**](#4-customizing-the-inner-listview).
 
 All the `app:*` attributes are optional, but if you don't provide any entries you will have to do it later in code with `drawer.setListViewSections(...)`.
 
