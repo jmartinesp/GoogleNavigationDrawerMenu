@@ -52,7 +52,13 @@ With GoogleNavigationDrawerMenu you can:
 
 **Maven dependency:**
 
-I'm sorry, but it still isn't available as a Maven dependency.
+Add this to your Application Module's `build.gradle`:
+
+    dependencies {
+      ...
+      compile 'com.arasthel:gnavdrawer-library:1.0.0'
+      ...
+    }
 
 ###2. Use class in XML or code:
 
