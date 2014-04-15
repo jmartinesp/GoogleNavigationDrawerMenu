@@ -93,13 +93,16 @@ All the `app:*` attributes are optional, but if you don't provide any entries yo
 ####Using GoogleNavigationDrawer in Java Code:
 
 ```java
+ViewGroup container = (ViewGroup) findViewById(R.id.container);
 GoogleNavigationDrawer drawer = new GoogleNavigationDrawer(context);
 // Here we are providing data to the adapter of the ListView
 drawer.setListViewSections(new String[]{"Section A", "Section B"}, // Main sections
         new String[]{"Settings"}, // Secondary sections
         new int[]{R.drawable.ic_launcher}, // Main sections icon ids
         null); // Secondary sections icon ids
-this.addView(drawer);
+// To work correctly, a DrawerLayout must be the only View in a ViewGroup
+container.clear();
+container.addView(drawer);
 ```
 
 
