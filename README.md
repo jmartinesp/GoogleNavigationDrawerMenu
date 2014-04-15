@@ -104,8 +104,9 @@ drawer.setListViewSections(new String[]{"Section A", "Section B"}, // Main secti
 // To work correctly, a DrawerLayout must be the only View in a ViewGroup
 container.removeAllViews();
 container.addView(drawer);
-// Now we add the content to the drawer since the menu is already there
-drawer.addView(contentView);
+// Now we add the content to the drawer since the menu is already there.
+// Also, DrawerLayout forces the contentView to be the first item. Otherwise, you can't click on the menu.
+drawer.addView(contentView, 0);
 ```
 
 
