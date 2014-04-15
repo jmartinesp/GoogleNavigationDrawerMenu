@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="main_section_item_height">64dp</dimen>
+    <dimen name="secondary_section_item_height">46dp</dimen>
+
+    <dimen name="main_section_icon_size">48dp</dimen>
+    <dimen name="secondary_section_icon_size">32dp</dimen>
+</resources>

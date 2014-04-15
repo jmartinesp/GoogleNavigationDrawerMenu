@@ -1,0 +1,19 @@
+<resources>
+    <style name="GoogleNavDrawer.MainSectionText" parent="android:TextAppearance.Medium">
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">21sp</item>
+        <item name="android:minHeight">@dimen/main_section_item_height</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="GoogleNavDrawer.SecondarySectionText" parent="GoogleNavDrawer.MainSectionText">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:minHeight">@dimen/secondary_section_item_height</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+</resources>

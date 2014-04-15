@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GoogleNavigationDrawer">
+        <attr name="list_paddingTop" format="dimension|reference"></attr>
+        <attr name="list_paddingBottom" format="dimension|reference"></attr>
+        <attr name="list_paddingLeft" format="dimension|reference"></attr>
+        <attr name="list_paddingRight" format="dimension|reference"></attr>
+        <attr name="list_mainSectionsEntries" format="reference"></attr>
+        <attr name="list_secondarySectionsEntries" format="reference"></attr>
+        <attr name="list_mainSectionsDrawables" format="reference"></attr>
+        <attr name="list_secondarySectionsDrawables" format="reference"></attr>
+        <attr name="list_mainSectionsBackground" format="reference"></attr>
+        <attr name="list_secondarySectionsBackground" format="reference"></attr>
+        <attr name="drawer_gravity">
+            <flag name="right" value="0x05" />
+            <flag name="left" value="0x03" />
+            <flag name="start" value="0x00800003" />
+            <flag name="end" value="0x00800005" />
+        </attr>
+        <attr name="list_headerView" format="reference"></attr>
+        <attr name="list_footerView" format="reference"></attr>
+    </declare-styleable>
+</resources>

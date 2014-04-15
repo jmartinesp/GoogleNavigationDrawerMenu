@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<org.arasthel.googlenavdrawermenu.views.CheckableRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    
+    <org.arasthel.googlenavdrawermenu.views.CheckableImageView
+        android:id="@android:id/icon"
+        android:layout_width="@dimen/main_section_icon_size"
+        android:layout_height="@dimen/main_section_icon_size"
+        android:layout_marginLeft="10dp"
+        tools:visibility="visible"
+        android:layout_centerVertical="true"
+        tools:src="@drawable/ic_launcher"
+        android:scaleType="centerInside"
+        android:visibility="gone"/>
+    
+    <org.arasthel.googlenavdrawermenu.views.CheckedTextView
+        android:id="@android:id/text1"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/GoogleNavDrawer.MainSectionText"
+        android:layout_toRightOf="@android:id/icon"
+        tools:text="Sección Primera">
+    
+    </org.arasthel.googlenavdrawermenu.views.CheckedTextView>
+</org.arasthel.googlenavdrawermenu.views.CheckableRelativeLayout>
