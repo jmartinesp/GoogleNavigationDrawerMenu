@@ -33,3 +33,5 @@ sourceSets {
 task jar(type: Jar) {
     from sourceSets.main.java
 }
+
+apply from: '../maven_push.gradle'
