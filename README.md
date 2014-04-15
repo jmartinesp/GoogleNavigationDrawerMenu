@@ -4,6 +4,15 @@ This project aims to let you use a ListView menu similar to the one in the new G
 
 ![Screenshot](GoogleNavigationDrawer.jpg)
 
+## Index
+* [Features](#features)
+* [How to use](#how-to-use)
+    1. [Include the library](#1-include-the-library)
+    2. [Use class in XML or code](#2-use-class-in-xml-or-code)
+    3. [Handling selection](#3-handling-selection-opening-and-closing-of-the-menu)
+    4. [Customizing the inner ListView](#4-customizing-the-inner-listview)
+* [License](#license)
+
 ## Features
 
 With GoogleNavigationDrawerMenu you can:
