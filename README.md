@@ -48,7 +48,7 @@ With GoogleNavigationDrawerMenu you can:
 
   Notice the ```flatDir``` local maven repository created. Now you will have to add the aar file to the *dependencies* list, as if you were adding it from Maven Central Repository:
 
-        compile 'com.arasthel:gnavdrawer-library:1.0.0'
+        compile 'com.arasthel:gnavdrawer-library:1.0.+'
 
 
 **Automatic (Gradle):**
@@ -58,7 +58,7 @@ Add it to your Application Module's `build.gradle`:
 Declare it into your build.gradle
 
     dependencies{
-        compile 'com.arasthel:gnavdrawer-library:1.0.0'
+        compile 'com.arasthel:gnavdrawer-library:1.0.+'
     }
 
 ###2. Use class in XML or code:
