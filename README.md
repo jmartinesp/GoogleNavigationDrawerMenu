@@ -35,7 +35,7 @@ With GoogleNavigationDrawerMenu you can:
 
   **Manually (Option B):**
 
-  * Download the [AAR](raw/master/aars/GoogleNavigationDrawerMenu.aar).
+  * Download the [AAR](blob/master/aars/GoogleNavigationDrawerMenu.aar?raw=true).
   * Put it in the ```aars``` folder of your Android Studio project.
   * Add a File Dependency or add it to the ```build.gradle``` of your main Module, like this:
 
