@@ -18,7 +18,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v4.widget.DrawerLayout;
 import android.util.AttributeSet;
-import android.view.Gravity;
+import android.support.v4.view.GravityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -41,7 +41,7 @@ public class GoogleNavigationDrawer extends DrawerLayout {
     private int mListPaddingLeft = 0;
     private int mListPaddingRight = 0;
 
-    private int mDrawerGravity = Gravity.START;
+    private int mDrawerGravity = GravityCompat.START;
 
     private OnNavigationSectionSelected mSelectionListener;
 
