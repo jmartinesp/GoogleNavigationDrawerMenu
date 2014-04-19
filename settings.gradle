@@ -1,1 +1,1 @@
-include 'GoogleNavigationDrawerMenuLibrary'
+include 'GoogleNavigationDrawerMenuLibrary', ':XMLSample', ':CodeSample'

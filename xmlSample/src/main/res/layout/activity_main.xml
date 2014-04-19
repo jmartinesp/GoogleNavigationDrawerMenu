@@ -4,7 +4,6 @@
         android:id="@+id/navigation_drawer_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:list_paddingTop="?android:actionBarSize"
         app:drawer_gravity="start"
         app:list_mainSectionsEntries="@array/navigation_main_sections"
         app:list_secondarySectionsEntries="@array/navigation_secondary_sections"

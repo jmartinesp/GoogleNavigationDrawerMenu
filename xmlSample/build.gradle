@@ -20,6 +20,6 @@ android {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:+'
-    compile 'com.arasthel:gnavdrawer-library:1.0.0'
+    compile project(':GoogleNavigationDrawerMenuLibrary')
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
