@@ -15,12 +15,17 @@ package com.dexafree.googlenavigationdrawermenusample;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout.LayoutParams;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.*;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer;
 
 public class MainActivity extends ActionBarActivity {
@@ -61,14 +66,32 @@ public class MainActivity extends ActionBarActivity {
         View contentView = inflater.inflate(R.layout.main_content, null);
         mDrawer.addView(contentView, 0);
 
-		// Now we add a clickable header and an unclickable footer to the menu
-		TextView header = new TextView(this);
-		header.setText("The header");
-		TextView footer = new TextView(this);
-		footer.setText("The footer");
-		mDrawer.setMenuHeaderAndFooter(header,footer,true,false);
+        float density = getResources().getDisplayMetrics().density;
+        int padding = (int) (8*density);
+
+        // Now we add a clickable header and an unclickable footer to the menu
+        TextView header = new TextView(this);
+        header.setTextColor(Color.WHITE);
+        header.setGravity(Gravity.CENTER_HORIZONTAL);
+        header.setBackgroundResource(R.drawable.abc_list_selector_background_transition_holo_dark);
+        header.setText("The clickable header");
+        header.setPadding(padding, padding, padding, padding);
+
+        TextView footer = new TextView(this);
+        footer.setText("The footer");
+        footer.setTextColor(Color.WHITE);
+        footer.setPadding(padding, padding, padding, padding);
+        footer.setGravity(Gravity.CENTER_HORIZONTAL);
+        footer.setBackgroundColor(Color.DKGRAY);
+        mDrawer.setMenuHeaderAndFooter(header,footer,true,false);
         setContentView(mDrawer);
 
+        mDrawer.setOnNavigationSectionSelected(new GoogleNavigationDrawer.OnNavigationSectionSelected() {
+            @Override
+            public void onSectionSelected(View v, int i, long l) {
+                Toast.makeText(getBaseContext(), "Selected section: "+i, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //Prepare the drawerToggle in order to be able to open/close the drawer
         drawerToggle = new ActionBarDrawerToggle(this,
