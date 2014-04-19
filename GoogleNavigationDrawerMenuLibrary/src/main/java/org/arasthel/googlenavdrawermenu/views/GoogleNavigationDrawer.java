@@ -152,10 +152,10 @@ public class GoogleNavigationDrawer extends DrawerLayout {
         mListView.setPadding(mListPaddingLeft, mListPaddingTop, mListPaddingRight, mListPaddingBottom);
         ((DrawerLayout.LayoutParams) mListView.getLayoutParams()).gravity = mDrawerGravity;
         if(mHeaderView != null) {
-            setMenuHeader(mHeaderView);
+            setMenuHeader(mHeaderView,mHeaderClickable);
         }
         if(mFooterView != null) {
-            setMenuFooter(mFooterView);
+            setMenuFooter(mFooterView,mFooterClickable);
         }
         addView(mListView);
     }
