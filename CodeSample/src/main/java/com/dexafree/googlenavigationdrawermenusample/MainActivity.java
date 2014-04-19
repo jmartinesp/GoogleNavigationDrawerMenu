@@ -20,6 +20,7 @@ import android.support.v4.widget.DrawerLayout.LayoutParams;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.*;
+import android.widget.TextView;
 import org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer;
 
 public class MainActivity extends ActionBarActivity {
@@ -60,7 +61,12 @@ public class MainActivity extends ActionBarActivity {
         View contentView = inflater.inflate(R.layout.main_content, null);
         mDrawer.addView(contentView, 0);
 
-
+		// Now we add a clickable header and an unclickable footer to the menu
+		TextView header = new TextView(this);
+		header.setText("The header");
+		TextView footer = new TextView(this);
+		footer.setText("The footer");
+		mDrawer.setMenuHeaderAndFooter(header,footer,true,false);
         setContentView(mDrawer);
 
 
