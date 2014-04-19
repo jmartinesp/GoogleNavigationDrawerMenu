@@ -223,7 +223,8 @@ public class GoogleNavigationDrawer extends DrawerLayout {
                     if(mFooterView != null && i == mListView.getCount()-1 && !mFooterClickable) {
                         return;
                     }
-                    ((CheckableRelativeLayout) view).setChecked(true);
+
+                    mListView.setItemChecked(i, true);
 
                     mSelectionListener.onSectionSelected(view, i, l);
                     closeDrawerMenu();
