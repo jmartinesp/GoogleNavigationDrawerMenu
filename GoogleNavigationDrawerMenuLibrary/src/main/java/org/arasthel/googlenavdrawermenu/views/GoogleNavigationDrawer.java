@@ -250,7 +250,7 @@ public class GoogleNavigationDrawer extends DrawerLayout {
     public void setMenuHeader(View v, boolean b) {
         if(mListView != null) {
             mHeaderView = v;
-            mListView.addHeaderView(v, null, isHeaderClickable);
+            mListView.addHeaderView(v, null, b);
         }
     }
 
