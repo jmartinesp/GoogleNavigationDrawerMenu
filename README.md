@@ -144,6 +144,8 @@ app:list_mainSectionsDrawables="array"
 app:list_secondarySectionsDrawables="array"
 app:list_headerView="layout"
 app:list_footerView="layout"
+app:list_headerClickable="boolean"
+app:list_footerClickable="boolean"
 app:list_mainSectionsBackground="drawable"
 app:list_secondarySectionsBackground="drawable"
 ```
