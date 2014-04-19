@@ -19,5 +19,7 @@
         </attr>
         <attr name="list_headerView" format="reference"></attr>
         <attr name="list_footerView" format="reference"></attr>
+        <attr name="list_headerClickable" format="boolean"></attr>
+        <attr name="list_footerClickable" format="boolean"></attr>
     </declare-styleable>
 </resources>

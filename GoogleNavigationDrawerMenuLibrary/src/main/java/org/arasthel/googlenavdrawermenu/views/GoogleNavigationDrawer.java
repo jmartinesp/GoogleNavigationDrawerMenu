@@ -49,9 +49,12 @@ public class GoogleNavigationDrawer extends DrawerLayout {
 
     private int[] mMainSectionsDrawableIds;
     private int[] mSecondarySectionsDrawableIds;
-
+    
     private View mHeaderView;
     private View mFooterView;
+    
+    private boolean mHeaderClickable = true;
+    private boolean mFooterClickable = true;
 
     public GoogleNavigationDrawer(Context context) {
         super(context);
@@ -97,7 +100,7 @@ public class GoogleNavigationDrawer extends DrawerLayout {
         mSecondarySections = Utils.convertToStringArray(typedArray.getTextArray(R.styleable.GoogleNavigationDrawer_list_secondarySectionsEntries));
 
         int mainSectDrawableId = typedArray.getResourceId(R.styleable.GoogleNavigationDrawer_list_mainSectionsDrawables, -1);
-
+		
         if(mMainSections != null) {
             mMainSectionsDrawableIds = new int[mMainSections.length];
 
@@ -127,11 +130,13 @@ public class GoogleNavigationDrawer extends DrawerLayout {
         int headerViewId = typedArray.getResourceId(R.styleable.GoogleNavigationDrawer_list_headerView, -1);
         if(headerViewId != -1) {
             mHeaderView = inflater.inflate(headerViewId, null);
+            mHeaderClickable = typedArray.getBoolean(R.styleable.GoogleNavigationDrawer_list_headerClickable, true);
         }
 
         int footerViewId = typedArray.getResourceId(R.styleable.GoogleNavigationDrawer_list_footerView, -1);
         if(footerViewId != -1) {
             mFooterView = inflater.inflate(footerViewId, null);
+            mFooterClickable = typedArray.getBoolean(R.styleable.GoogleNavigationDrawer_list_footerClickable, true);
         }
 
         typedArray.recycle();
@@ -147,10 +152,10 @@ public class GoogleNavigationDrawer extends DrawerLayout {
         mListView.setPadding(mListPaddingLeft, mListPaddingTop, mListPaddingRight, mListPaddingBottom);
         ((DrawerLayout.LayoutParams) mListView.getLayoutParams()).gravity = mDrawerGravity;
         if(mHeaderView != null) {
-            setMenuHeader(mHeaderView);
+            setMenuHeader(mHeaderView,mHeaderClickable);
         }
         if(mFooterView != null) {
-            setMenuFooter(mFooterView);
+            setMenuFooter(mFooterView,mFooterClickable);
         }
         addView(mListView);
     }
@@ -208,11 +213,11 @@ public class GoogleNavigationDrawer extends DrawerLayout {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                    if(mHeaderView != null && i == 0) {
+                    if(mHeaderView != null && i == 0 && !mHeaderClickable) {
                         return;
                     }
 
-                    if(mFooterView != null && i == mListView.getCount()-1) {
+                    if(mFooterView != null && i == mListView.getCount()-1 && !mFooterClickable) {
                         return;
                     }
                     ((CheckableRelativeLayout) view).setChecked(true);
@@ -236,6 +241,18 @@ public class GoogleNavigationDrawer extends DrawerLayout {
             mListView.addHeaderView(v);
         }
     }
+    
+    /**
+     * Set a custom header view
+     * @param v The header view
+     * @param b Is the header clickable
+     */
+    public void setMenuHeader(View v, boolean b) {
+        if(mListView != null) {
+            mHeaderView = v;
+            mListView.addHeaderView(v, null, isHeaderClickable);
+        }
+    }
 
     /**
      * Returns the header of the ListView
@@ -253,6 +270,18 @@ public class GoogleNavigationDrawer extends DrawerLayout {
         if(mListView != null) {
             mFooterView = v;
             mListView.addFooterView(v);
+        }
+    }
+    
+    /**
+     * Set a custom footer view
+     * @param v The footer view
+     * @param b Is the header clickable
+     */
+    public void setMenuFooter(View v, boolean b) {
+        if(mListView != null) {
+            mFooterView = v;
+            mListView.addFooterView(v, null, b);
         }
     }
 
