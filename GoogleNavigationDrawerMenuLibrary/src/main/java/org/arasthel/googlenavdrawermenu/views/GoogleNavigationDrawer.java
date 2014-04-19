@@ -22,6 +22,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import org.arasthel.googlenavdrawermenu.R;
@@ -241,16 +242,24 @@ public class GoogleNavigationDrawer extends DrawerLayout {
             mListView.addHeaderView(v);
         }
     }
-    
+
     /**
      * Set a custom header view
      * @param v The header view
-     * @param b Is the header clickable
      */
-    public void setMenuHeader(View v, boolean b) {
+    public void setMenuHeader(View v, boolean clickable) {
         if(mListView != null) {
+            setHeaderClickable(clickable);
+            if(mListView.getAdapter() != null) {
+                ListAdapter adapter = (ListAdapter) mListView.getAdapter();
+                removeView(mListView);
+                configureList();
+                mListView.addHeaderView(v, null, isHeaderClickable());
+                mListView.setAdapter(adapter);
+            } else {
+                mListView.addHeaderView(v, null, isHeaderClickable());
+            }
             mHeaderView = v;
-            mListView.addHeaderView(v, null, b);
         }
     }
 
@@ -266,23 +275,62 @@ public class GoogleNavigationDrawer extends DrawerLayout {
      * Set a custom footer view
      * @param v The footer view
      */
-    public void setMenuFooter(View v) {
+    public void setMenuFooter(View v, boolean clickable) {
         if(mListView != null) {
+            setFooterClickable(clickable);
+            if(mListView.getAdapter() != null) {
+                ListAdapter adapter = mListView.getAdapter();
+                removeView(mListView);
+                configureList();
+                mListView.addFooterView(v, null, isFooterClickable());
+                mListView.setAdapter(adapter);
+            } else {
+                mListView.addFooterView(v, null, isFooterClickable());
+            }
             mFooterView = v;
-            mListView.addFooterView(v);
         }
     }
-    
+
     /**
-     * Set a custom footer view
-     * @param v The footer view
-     * @param b Is the header clickable
+     * Adding a header and a footer to an already populated ListView is quite inefficient.
+     * To make it less messy, please use this method if you are going to add both of them.
+     * @param header The header View
+     * @param footer The footer View
      */
-    public void setMenuFooter(View v, boolean b) {
+    public void setMenuHeaderAndFooter(View header, View footer, boolean headerClickable, boolean footerClickable) {
         if(mListView != null) {
-            mFooterView = v;
-            mListView.addFooterView(v, null, b);
+            setHeaderClickable(headerClickable);
+            setFooterClickable(footerClickable);
+            if(mListView.getAdapter() != null) {
+                ListAdapter adapter = mListView.getAdapter();
+                removeView(mListView);
+                configureList();
+                mListView.addHeaderView(header, null, isHeaderClickable());
+                mListView.addFooterView(footer, null, isFooterClickable());
+                mListView.setAdapter(adapter);
+            } else {
+                mListView.addFooterView(header, null, isHeaderClickable());
+                mListView.addFooterView(footer, null, isFooterClickable());
+            }
+            mHeaderView = header;
+            mFooterView = footer;
         }
+    }
+
+    public boolean isHeaderClickable() {
+        return mHeaderClickable;
+    }
+
+    public void setHeaderClickable(boolean mHeaderClickable) {
+        this.mHeaderClickable = mHeaderClickable;
+    }
+
+    public boolean isFooterClickable() {
+        return mFooterClickable;
+    }
+
+    public void setFooterClickable(boolean mFooterClickable) {
+        this.mFooterClickable = mFooterClickable;
     }
 
     /**
