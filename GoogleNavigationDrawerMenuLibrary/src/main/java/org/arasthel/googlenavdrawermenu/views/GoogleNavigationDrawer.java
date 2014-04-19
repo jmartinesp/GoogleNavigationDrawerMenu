@@ -110,6 +110,7 @@ public class GoogleNavigationDrawer extends DrawerLayout {
                 for (int i = 0; i < mMainSections.length; i++) {
                     mMainSectionsDrawableIds[i] = mainSectTypedArray.getResourceId(i, 0);
                 }
+                mainSectTypedArray.recycle();
             }
         }
 
@@ -123,6 +124,7 @@ public class GoogleNavigationDrawer extends DrawerLayout {
                 for (int i = 0; i < mSecondarySections.length; i++) {
                     mSecondarySectionsDrawableIds[i] = secondarySectTypedArray.getResourceId(i, 0);
                 }
+                secondarySectTypedArray.recycle();
             }
         }
 
