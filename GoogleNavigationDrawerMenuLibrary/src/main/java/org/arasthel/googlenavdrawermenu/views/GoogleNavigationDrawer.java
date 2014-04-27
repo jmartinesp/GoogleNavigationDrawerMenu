@@ -16,6 +16,8 @@ package org.arasthel.googlenavdrawermenu.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.widget.DrawerLayout;
 import android.util.AttributeSet;
 import android.support.v4.view.GravityCompat;
@@ -29,9 +31,6 @@ import org.arasthel.googlenavdrawermenu.R;
 import org.arasthel.googlenavdrawermenu.adapters.GoogleNavigationDrawerAdapter;
 import org.arasthel.googlenavdrawermenu.utils.Utils;
 
-/**
- * Created by Arasthel on 14/04/14.
- */
 public class GoogleNavigationDrawer extends DrawerLayout {
 
     private ListView mListView;
@@ -50,12 +49,14 @@ public class GoogleNavigationDrawer extends DrawerLayout {
 
     private int[] mMainSectionsDrawableIds;
     private int[] mSecondarySectionsDrawableIds;
-    
+
     private View mHeaderView;
     private View mFooterView;
-    
+
     private boolean mHeaderClickable = true;
     private boolean mFooterClickable = true;
+
+    private int checkPosition;
 
     public GoogleNavigationDrawer(Context context) {
         super(context);
@@ -101,7 +102,7 @@ public class GoogleNavigationDrawer extends DrawerLayout {
         mSecondarySections = Utils.convertToStringArray(typedArray.getTextArray(R.styleable.GoogleNavigationDrawer_list_secondarySectionsEntries));
 
         int mainSectDrawableId = typedArray.getResourceId(R.styleable.GoogleNavigationDrawer_list_mainSectionsDrawables, -1);
-		
+
         if(mMainSections != null) {
             mMainSectionsDrawableIds = new int[mMainSections.length];
 
@@ -176,12 +177,23 @@ public class GoogleNavigationDrawer extends DrawerLayout {
         }
         GoogleNavigationDrawerAdapter adapter = new GoogleNavigationDrawerAdapter(getContext(), mainSections, secondarySections, mainDrawableIds, secondaryDrawableIds);
         mListView.setAdapter(adapter);
-        if(mHeaderView != null) {
-            mListView.setItemChecked(1, true);
+        if(mHeaderView != null && !isHeaderClickable()) {
+            check(1);
         } else {
-            mListView.setItemChecked(0, true);
+            check(0);
         }
     }
+
+    /**
+     * Check an item on the ListView
+     * @param position The position to check
+     */
+    public void check(int position) {
+        mListView.setItemChecked(checkPosition, false);
+        mListView.setItemChecked(position, true);
+        checkPosition = position;
+    }
+
 
     /**
      * Helper to access the isDrawerOpen method of the ListView menu.
@@ -224,7 +236,7 @@ public class GoogleNavigationDrawer extends DrawerLayout {
                         return;
                     }
 
-                    mListView.setItemChecked(i, true);
+                    check(i);
 
                     mSelectionListener.onSectionSelected(view, i, l);
                     closeDrawerMenu();
@@ -348,5 +360,21 @@ public class GoogleNavigationDrawer extends DrawerLayout {
 
         public void onSectionSelected(View v, int i, long l);
 
+    }
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Parcelable superState = super.onSaveInstanceState();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("view", superState);
+        bundle.putInt("position", checkPosition);
+        return bundle;
+    }
+
+    @Override
+    public void onRestoreInstanceState(Parcelable state) {
+        Bundle bundle = (Bundle)state;
+        super.onRestoreInstanceState(bundle.getParcelable("view"));
+        check(bundle.getInt("position"));
     }
 }
