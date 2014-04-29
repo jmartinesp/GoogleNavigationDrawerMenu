@@ -162,6 +162,28 @@ public class GoogleNavigationDrawer extends DrawerLayout {
             setMenuFooter(mFooterView,mFooterClickable);
         }
         addView(mListView);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                if(mHeaderView != null && i == 0 && !mHeaderClickable) {
+                    return;
+                }
+
+                if(mFooterView != null && i == mListView.getCount()-1 && !mFooterClickable) {
+                    return;
+                }
+
+                check(i);
+
+                if(mSelectionListener != null) {
+                    mSelectionListener.onSectionSelected(view, i, l);
+                }
+
+                closeDrawerMenu();
+            }
+        });
     }
 
     /**
@@ -223,28 +245,6 @@ public class GoogleNavigationDrawer extends DrawerLayout {
      */
     public void setOnNavigationSectionSelected(OnNavigationSectionSelected listener) {
         mSelectionListener = listener;
-        if(mSelectionListener != null) {
-            mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                    if(mHeaderView != null && i == 0 && !mHeaderClickable) {
-                        return;
-                    }
-
-                    if(mFooterView != null && i == mListView.getCount()-1 && !mFooterClickable) {
-                        return;
-                    }
-
-                    check(i);
-
-                    mSelectionListener.onSectionSelected(view, i, l);
-                    closeDrawerMenu();
-                }
-            });
-        } else {
-            mListView.setOnItemClickListener(null);
-        }
     }
 
     /**
@@ -368,6 +368,7 @@ public class GoogleNavigationDrawer extends DrawerLayout {
         Bundle bundle = new Bundle();
         bundle.putParcelable("view", superState);
         bundle.putInt("position", checkPosition);
+        bundle.putBoolean("isdraweropen", isDrawerMenuOpen());
         return bundle;
     }
 
@@ -376,5 +377,7 @@ public class GoogleNavigationDrawer extends DrawerLayout {
         Bundle bundle = (Bundle)state;
         super.onRestoreInstanceState(bundle.getParcelable("view"));
         check(bundle.getInt("position"));
+        if (bundle.getBoolean("isdraweropen", false))
+            openDrawerMenu();
     }
 }
