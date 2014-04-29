@@ -368,6 +368,7 @@ public class GoogleNavigationDrawer extends DrawerLayout {
         Bundle bundle = new Bundle();
         bundle.putParcelable("view", superState);
         bundle.putInt("position", checkPosition);
+        bundle.putBoolean("isdraweropen", isDrawerMenuOpen());
         return bundle;
     }
 
@@ -376,5 +377,7 @@ public class GoogleNavigationDrawer extends DrawerLayout {
         Bundle bundle = (Bundle)state;
         super.onRestoreInstanceState(bundle.getParcelable("view"));
         check(bundle.getInt("position"));
+        if (bundle.getBoolean("isdraweropen", false))
+            openDrawerMenu();
     }
 }
