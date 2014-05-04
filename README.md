@@ -68,16 +68,16 @@ Declare it into your build.gradle
 ```xml
 <org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer
 xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:drawer="http://schemas.android.com/apk/res-auto"
 android:id="@+id/navigation_drawer_container"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-app:list_paddingTop="?android:actionBarSize"
-app:drawer_gravity="start"
-app:list_mainSectionsEntries="@array/navigation_main_sections"
-app:list_secondarySectionsEntries="@array/navigation_secondary_sections"
-app:list_mainSectionsDrawables="@array/drawable_ids"
-app:list_secondarySectionsDrawables="@array/drawable_ids">
+drawer:list_paddingTop="?android:actionBarSize"
+drawer:drawer_gravity="start"
+drawer:list_mainSectionsEntries="@array/navigation_main_sections"
+drawer:list_secondarySectionsEntries="@array/navigation_secondary_sections"
+drawer:list_mainSectionsDrawables="@array/drawable_ids"
+drawer:list_secondarySectionsDrawables="@array/drawable_ids">
 
   <FrameLayout
       android:id="@+id/content_layout"
@@ -89,7 +89,7 @@ app:list_secondarySectionsDrawables="@array/drawable_ids">
 
 You may think *'Ok, so where's the menu?'*. Well, the GoogleNavigationDrawer class itself contains it and handles it so you don't have to manually modify it. You can customize it, though, you can find that info in [**Customizing Section**](#4-customizing-the-inner-listview).
 
-All the `app:*` attributes are optional, but if you don't provide any entries you will have to do it later in code with `drawer.setListViewSections(...)`.
+All the `drawer:*` attributes are optional, but if you don't provide any entries you will have to do it later in code with `drawer.setListViewSections(...)`.
 
 ####Using GoogleNavigationDrawer in Java Code:
 
@@ -136,18 +136,18 @@ public void setOnNavigationSectionSelected(OnNavigationSectionSelected listener)
  Finally, customization. The main XML attributes of the class are the following:
 
 ```xml
-app:list_padding[Top, Bottom, Left, Right]="dimen"
-app:drawer_gravity="start"
-app:list_mainSectionsEntries="array"
-app:list_secondarySectionsEntries="array"
-app:list_mainSectionsDrawables="array"
-app:list_secondarySectionsDrawables="array"
-app:list_headerView="layout"
-app:list_footerView="layout"
-app:list_headerClickable="boolean" (default is true)
-app:list_footerClickable="boolean" (default is true)
-app:list_mainSectionsBackground="drawable"
-app:list_secondarySectionsBackground="drawable"
+drawer:list_padding[Top, Bottom, Left, Right]="dimen"
+drawer:drawer_gravity="start"
+drawer:list_mainSectionsEntries="array"
+drawer:list_secondarySectionsEntries="array"
+drawer:list_mainSectionsDrawables="array"
+drawer:list_secondarySectionsDrawables="array"
+drawer:list_headerView="layout"
+drawer:list_footerView="layout"
+drawer:list_headerClickable="boolean" (default is true)
+drawer:list_footerClickable="boolean" (default is true)
+drawer:list_mainSectionsBackground="drawable"
+drawer:list_secondarySectionsBackground="drawable"
 ```
 
 
