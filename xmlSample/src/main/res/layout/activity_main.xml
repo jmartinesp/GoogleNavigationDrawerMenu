@@ -1,14 +1,14 @@
 <org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:drawer="http://schemas.android.com/apk/res-auto"
         android:id="@+id/navigation_drawer_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:drawer_gravity="start"
-        app:list_mainSectionsEntries="@array/navigation_main_sections"
-        app:list_secondarySectionsEntries="@array/navigation_secondary_sections"
-        app:list_mainSectionsDrawables="@array/drawable_ids"
-        app:list_secondarySectionsDrawables="@array/drawable_ids">
+        drawer:drawer_gravity="start"
+        drawer:list_mainSectionsEntries="@array/navigation_main_sections"
+        drawer:list_secondarySectionsEntries="@array/navigation_secondary_sections"
+        drawer:list_mainSectionsDrawables="@array/drawable_ids"
+        drawer:list_secondarySectionsDrawables="@array/drawable_ids">
 
     <FrameLayout
             android:id="@+id/content_layout"
