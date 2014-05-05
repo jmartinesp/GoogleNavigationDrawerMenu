@@ -14,6 +14,7 @@
 
 package org.arasthel.googlenavdrawermenu.views;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -26,11 +27,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.os.Build;
-
-import com.actionbarsherlock.app.SherlockActivity;
-
-import android.support.v7.app.ActionBarActivity;
 
 import org.arasthel.googlenavdrawermenu.R;
 import org.arasthel.googlenavdrawermenu.adapters.GoogleNavigationDrawerAdapter;
@@ -62,11 +58,11 @@ public class GoogleNavigationDrawer extends DrawerLayout {
     private boolean mFooterClickable = true;
 
     private int checkPosition;
-	
-	private Activity mActivity;
-	
-	private boolean mShouldChangeTitle = false;
-	
+
+    private Activity mActivity;
+
+    private boolean mShouldChangeTitle = false;
+
     public GoogleNavigationDrawer(Context context) {
         super(context);
     }
@@ -95,14 +91,14 @@ public class GoogleNavigationDrawer extends DrawerLayout {
         setListViewSections(mMainSections, mSecondarySections, mMainSectionsDrawableIds, mSecondarySectionsDrawableIds);
     }
 
-	public void setShouldChangeTitle(Activity activity, boolean shouldChangeTitle) {
-		if (shouldChangeTitle)
-			mActivity = activity;
-		else
-			mActivity = null;
-		mShouldChangeTitle = shouldChangeTitle;
-	}
-	
+    public void setShouldChangeTitle(Activity activity, boolean shouldChangeTitle) {
+        if (shouldChangeTitle)
+            mActivity = activity;
+        else
+            mActivity = null;
+        mShouldChangeTitle = shouldChangeTitle;
+    }
+
     /**
      * Configure View with custom attrs
      * @param typedArray - A TypedArray
@@ -197,17 +193,12 @@ public class GoogleNavigationDrawer extends DrawerLayout {
                 if(mSelectionListener != null) {
                     mSelectionListener.onSectionSelected(view, i, l);
                 }
-				
-				if (mShouldChangeTitle && i != 0 && i != mListView.getCount() - 1) {
-					CharSequence title = (CharSequence) getItem(i);
-					if (mActivity instanceof SherlockActivity)
-						((SherlockActivity) mActivity).getSupportActionBar().setTitle(title);
-					else if (mActivity instanceof ActionBarActivity)
-						((ActionBarActivity) mActivity).getSupportActionBar().setTitle(title);
-					else if (Build.VERSION.SDK_INT >= 11)
-					    mActivity.getActionBar().setTitle(title);
-				}
-				
+
+                if (mShouldChangeTitle && i != 0 && i != mListView.getCount() - 1) {
+                    CharSequence title = (CharSequence) mListView.getAdapter().getItem(i);
+                    mActivity.setTitle(title);
+                }
+
                 closeDrawerMenu();
             }
         });
@@ -396,6 +387,7 @@ public class GoogleNavigationDrawer extends DrawerLayout {
         bundle.putParcelable("view", superState);
         bundle.putInt("position", checkPosition);
         bundle.putBoolean("isdraweropen", isDrawerMenuOpen());
+        bundle.putBoolean("shouldchangetitle", mShouldChangeTitle);
         return bundle;
     }
 
@@ -404,6 +396,11 @@ public class GoogleNavigationDrawer extends DrawerLayout {
         Bundle bundle = (Bundle)state;
         super.onRestoreInstanceState(bundle.getParcelable("view"));
         check(bundle.getInt("position"));
+        mShouldChangeTitle = bundle.getBoolean("shouldchangetitle", false);
+        if (mShouldChangeTitle && checkPosition != 0 && checkPosition != mListView.getCount() - 1) {
+            CharSequence title = (CharSequence) mListView.getAdapter().getItem(checkPosition);
+            mActivity.setTitle(title);
+        }
         if (bundle.getBoolean("isdraweropen", false))
             openDrawerMenu();
     }
