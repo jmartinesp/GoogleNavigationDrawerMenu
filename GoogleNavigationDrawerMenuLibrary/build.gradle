@@ -20,6 +20,7 @@ android {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:19.+'
+	compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
 

@@ -26,6 +26,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.os.Build;
+
+import com.actionbarsherlock.app.SherlockActivity;
+
+import android.support.v7.app.ActionBarActivity;
 
 import org.arasthel.googlenavdrawermenu.R;
 import org.arasthel.googlenavdrawermenu.adapters.GoogleNavigationDrawerAdapter;
@@ -57,7 +62,11 @@ public class GoogleNavigationDrawer extends DrawerLayout {
     private boolean mFooterClickable = true;
 
     private int checkPosition;
-
+	
+	private Activity mActivity;
+	
+	private boolean mShouldChangeTitle = false;
+	
     public GoogleNavigationDrawer(Context context) {
         super(context);
     }
@@ -86,6 +95,14 @@ public class GoogleNavigationDrawer extends DrawerLayout {
         setListViewSections(mMainSections, mSecondarySections, mMainSectionsDrawableIds, mSecondarySectionsDrawableIds);
     }
 
+	public void setShouldChangeTitle(Activity activity, boolean shouldChangeTitle) {
+		if (shouldChangeTitle)
+			mActivity = activity;
+		else
+			mActivity = null;
+		mShouldChangeTitle = shouldChangeTitle;
+	}
+	
     /**
      * Configure View with custom attrs
      * @param typedArray - A TypedArray
@@ -180,7 +197,17 @@ public class GoogleNavigationDrawer extends DrawerLayout {
                 if(mSelectionListener != null) {
                     mSelectionListener.onSectionSelected(view, i, l);
                 }
-
+				
+				if (mShouldChangeTitle && i != 0 && i != mListView.getCount() - 1) {
+					CharSequence title = (CharSequence) getItem(i);
+					if (mActivity instanceof SherlockActivity)
+						((SherlockActivity) mActivity).getSupportActionBar().setTitle(title);
+					else if (mActivity instanceof ActionBarActivity)
+						((ActionBarActivity) mActivity).getSupportActionBar().setTitle(title);
+					else if (Build.VERSION.SDK_INT >= 11)
+					    mActivity.getActionBar().setTitle(title);
+				}
+				
                 closeDrawerMenu();
             }
         });
