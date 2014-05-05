@@ -205,7 +205,7 @@ public class GoogleNavigationDrawer extends DrawerLayout {
 					else if (mActivity instanceof ActionBarActivity)
 						((ActionBarActivity) mActivity).getSupportActionBar().setTitle(title);
 					else if (Build.VERSION.SDK_INT >= 11)
-					    mActivity.getActionBar().setTitle(title);
+					    mActivity.setTitle(title);
 				}
 				
                 closeDrawerMenu();
