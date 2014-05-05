@@ -193,26 +193,12 @@ public class GoogleNavigationDrawer extends DrawerLayout {
                 if(mSelectionListener != null) {
                     mSelectionListener.onSectionSelected(view, i, l);
                 }
-<<<<<<< HEAD
 
                 if (mShouldChangeTitle && i != 0 && i != mListView.getCount() - 1) {
                     CharSequence title = (CharSequence) mListView.getAdapter().getItem(i);
                     mActivity.setTitle(title);
                 }
 
-=======
-				
-				if (mShouldChangeTitle && i != 0 && i != mListView.getCount() - 1) {
-					CharSequence title = (CharSequence) getItem(i);
-					if (mActivity instanceof SherlockActivity)
-						((SherlockActivity) mActivity).getSupportActionBar().setTitle(title);
-					else if (mActivity instanceof ActionBarActivity)
-						((ActionBarActivity) mActivity).getSupportActionBar().setTitle(title);
-					else if (Build.VERSION.SDK_INT >= 11)
-					    mActivity.setTitle(title);
-				}
-				
->>>>>>> 50257d1dbcbd6eb3c29dee1112d8b47a70850c72
                 closeDrawerMenu();
             }
         });
