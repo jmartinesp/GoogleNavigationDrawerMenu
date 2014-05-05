@@ -19,7 +19,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:19.+'
+    compile 'com.android.support:support-v4:+'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
 
@@ -35,4 +35,4 @@ task jar(type: Jar) {
 }
 
 // Script to upload plugin to Maven
-//apply from: '../maven_push.gradle'
+apply from: '../maven_push.gradle'
