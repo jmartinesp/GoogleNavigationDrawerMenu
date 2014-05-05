@@ -14,6 +14,7 @@
 
 package org.arasthel.googlenavdrawermenu.views;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -58,6 +59,10 @@ public class GoogleNavigationDrawer extends DrawerLayout {
 
     private int checkPosition;
 
+    private Activity mActivity;
+
+    private boolean mShouldChangeTitle = false;
+
     public GoogleNavigationDrawer(Context context) {
         super(context);
     }
@@ -84,6 +89,14 @@ public class GoogleNavigationDrawer extends DrawerLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
         setListViewSections(mMainSections, mSecondarySections, mMainSectionsDrawableIds, mSecondarySectionsDrawableIds);
+    }
+
+    public void setShouldChangeTitle(Activity activity, boolean shouldChangeTitle) {
+        if (shouldChangeTitle)
+            mActivity = activity;
+        else
+            mActivity = null;
+        mShouldChangeTitle = shouldChangeTitle;
     }
 
     /**
@@ -179,6 +192,11 @@ public class GoogleNavigationDrawer extends DrawerLayout {
 
                 if(mSelectionListener != null) {
                     mSelectionListener.onSectionSelected(view, i, l);
+                }
+
+                if (mShouldChangeTitle && i != 0 && i != mListView.getCount() - 1) {
+                    CharSequence title = (CharSequence) mListView.getAdapter().getItem(i);
+                    mActivity.setTitle(title);
                 }
 
                 closeDrawerMenu();
@@ -369,6 +387,7 @@ public class GoogleNavigationDrawer extends DrawerLayout {
         bundle.putParcelable("view", superState);
         bundle.putInt("position", checkPosition);
         bundle.putBoolean("isdraweropen", isDrawerMenuOpen());
+        bundle.putBoolean("shouldchangetitle", mShouldChangeTitle);
         return bundle;
     }
 
@@ -377,6 +396,11 @@ public class GoogleNavigationDrawer extends DrawerLayout {
         Bundle bundle = (Bundle)state;
         super.onRestoreInstanceState(bundle.getParcelable("view"));
         check(bundle.getInt("position"));
+        mShouldChangeTitle = bundle.getBoolean("shouldchangetitle", false);
+        if (mShouldChangeTitle && checkPosition != 0 && checkPosition != mListView.getCount() - 1) {
+            CharSequence title = (CharSequence) mListView.getAdapter().getItem(checkPosition);
+            mActivity.setTitle(title);
+        }
         if (bundle.getBoolean("isdraweropen", false))
             openDrawerMenu();
     }
