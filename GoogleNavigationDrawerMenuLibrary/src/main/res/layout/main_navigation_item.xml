@@ -26,4 +26,10 @@
         tools:text="Sección Primera">
     
     </org.arasthel.googlenavdrawermenu.views.CheckedTextView>
+
+    <View android:id="@+id/google_nav_drawer_divider_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@android:id/text1"/>
+
 </org.arasthel.googlenavdrawermenu.views.CheckableRelativeLayout>

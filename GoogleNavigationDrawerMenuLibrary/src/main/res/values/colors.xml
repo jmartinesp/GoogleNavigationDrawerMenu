@@ -2,4 +2,5 @@
 <resources>
     <color name="main_section_selected">@android:color/transparent</color>
     <color name="secondary_section_selected">#ccc</color>
+    <color name="secondary_divider_color">#ccc</color>
 </resources>

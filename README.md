@@ -35,7 +35,7 @@ With GoogleNavigationDrawerMenu you can:
 
   **Manually (Option B):**
 
-  * Download the [AAR](aars/GoogleNavigationDrawerMenu.aar?raw=true).
+  * Download the [AAR](aars/GoogleNavigationDrawerMenuLibrary.aar?raw=true).
   * Put it in the ```aars``` folder of your Android Studio project.
   * Add a File Dependency or add it to the ```build.gradle``` of your main Module, like this:
 
@@ -48,7 +48,7 @@ With GoogleNavigationDrawerMenu you can:
 
   Notice the ```flatDir``` local maven repository created. Now you will have to add the aar file to the *dependencies* list, as if you were adding it from Maven Central Repository:
 
-        compile 'com.arasthel:gnavdrawer-library:1.0.+'
+        compile 'com.arasthel:gnavdrawer-library:+'
 
 
 **Automatic (Gradle):**
@@ -58,7 +58,7 @@ Add it to your Application Module's `build.gradle`:
 Declare it into your build.gradle
 
     dependencies{
-        compile 'com.arasthel:gnavdrawer-library:1.0.+'
+        compile 'com.arasthel:gnavdrawer-library:+'
     }
 
 ###2. Use class in XML or code:
@@ -129,7 +129,11 @@ Also, to handle section selections, a listener has been provided:
 ```java
 public void setOnNavigationSectionSelected(OnNavigationSectionSelected listener);
 ```
+You can also easily tell the drawer to change your Activity title based on the selected section via this method:
 
+```java
+public void setShouldChangeTitle(Activity activity, boolean shouldChangeTitle);
+```
 
 ###4. Customizing the inner ListView:
 
@@ -148,6 +152,10 @@ drawer:list_headerClickable="boolean" (default is true)
 drawer:list_footerClickable="boolean" (default is true)
 drawer:list_mainSectionsBackground="drawable"
 drawer:list_secondarySectionsBackground="drawable"
+drawer:list_width="dimension"
+drawer:list_background="drawable|color"
+drawer:list_[main|secondary]_divider="drawable|color"
+drawer:list_[main|secondary]_divider_height="dimension"
 ```
 
 

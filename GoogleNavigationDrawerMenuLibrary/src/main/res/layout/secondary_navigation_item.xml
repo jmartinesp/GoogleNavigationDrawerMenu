@@ -32,7 +32,8 @@
 
         </org.arasthel.googlenavdrawermenu.views.CheckedTextView>
 
-        <View android:layout_width="match_parent"
+        <View android:id="@+id/google_nav_drawer_divider_bottom"
+            android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#ccc"
             android:layout_below="@android:id/text1"/>
