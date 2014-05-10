@@ -224,29 +224,32 @@ public class GoogleNavigationDrawer extends DrawerLayout {
 
         int mainSectDrawableId = typedArray.getResourceId(R.styleable.GoogleNavigationDrawer_list_mainSectionsDrawables, -1);
 
-        if(mMainSections != null) {
-            mMainSectionsDrawableIds = new int[mMainSections.length];
+        if(!isInEditMode()) {
 
-            if (mainSectDrawableId != -1) {
-                TypedArray mainSectTypedArray = getResources().obtainTypedArray(mainSectDrawableId);
-                for (int i = 0; i < mMainSections.length; i++) {
-                    mMainSectionsDrawableIds[i] = mainSectTypedArray.getResourceId(i, 0);
+            if (mMainSections != null) {
+                mMainSectionsDrawableIds = new int[mMainSections.length];
+
+                if (mainSectDrawableId != -1) {
+                    TypedArray mainSectTypedArray = getResources().obtainTypedArray(mainSectDrawableId);
+                    for (int i = 0; i < mMainSections.length; i++) {
+                        mMainSectionsDrawableIds[i] = mainSectTypedArray.getResourceId(i, 0);
+                    }
+                    mainSectTypedArray.recycle();
                 }
-                mainSectTypedArray.recycle();
             }
-        }
 
-        int secondarySectDrawableId = typedArray.getResourceId(R.styleable.GoogleNavigationDrawer_list_secondarySectionsDrawables, -1);
+            int secondarySectDrawableId = typedArray.getResourceId(R.styleable.GoogleNavigationDrawer_list_secondarySectionsDrawables, -1);
 
-        if(mSecondarySections != null) {
-            mSecondarySectionsDrawableIds = new int[mSecondarySections.length];
+            if (mSecondarySections != null) {
+                mSecondarySectionsDrawableIds = new int[mSecondarySections.length];
 
-            if (secondarySectDrawableId != -1) {
-                TypedArray secondarySectTypedArray = getResources().obtainTypedArray(secondarySectDrawableId);
-                for (int i = 0; i < mSecondarySections.length; i++) {
-                    mSecondarySectionsDrawableIds[i] = secondarySectTypedArray.getResourceId(i, 0);
+                if (secondarySectDrawableId != -1) {
+                    TypedArray secondarySectTypedArray = getResources().obtainTypedArray(secondarySectDrawableId);
+                    for (int i = 0; i < mSecondarySections.length; i++) {
+                        mSecondarySectionsDrawableIds[i] = secondarySectTypedArray.getResourceId(i, 0);
+                    }
+                    secondarySectTypedArray.recycle();
                 }
-                secondarySectTypedArray.recycle();
             }
         }
 
