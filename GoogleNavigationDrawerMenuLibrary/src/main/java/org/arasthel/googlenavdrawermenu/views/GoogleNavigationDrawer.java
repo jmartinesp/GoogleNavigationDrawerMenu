@@ -251,20 +251,21 @@ public class GoogleNavigationDrawer extends DrawerLayout {
                     secondarySectTypedArray.recycle();
                 }
             }
-        }
 
-        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        int headerViewId = typedArray.getResourceId(R.styleable.GoogleNavigationDrawer_list_headerView, -1);
-        if(headerViewId != -1) {
-            mHeaderView = inflater.inflate(headerViewId, null);
-            mHeaderClickable = typedArray.getBoolean(R.styleable.GoogleNavigationDrawer_list_headerClickable, true);
-        }
+            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        int footerViewId = typedArray.getResourceId(R.styleable.GoogleNavigationDrawer_list_footerView, -1);
-        if(footerViewId != -1) {
-            mFooterView = inflater.inflate(footerViewId, null);
-            mFooterClickable = typedArray.getBoolean(R.styleable.GoogleNavigationDrawer_list_footerClickable, true);
+            int headerViewId = typedArray.getResourceId(R.styleable.GoogleNavigationDrawer_list_headerView, -1);
+            if (headerViewId != -1) {
+                mHeaderView = inflater.inflate(headerViewId, null);
+                mHeaderClickable = typedArray.getBoolean(R.styleable.GoogleNavigationDrawer_list_headerClickable, true);
+            }
+
+            int footerViewId = typedArray.getResourceId(R.styleable.GoogleNavigationDrawer_list_footerView, -1);
+            if (footerViewId != -1) {
+                mFooterView = inflater.inflate(footerViewId, null);
+                mFooterClickable = typedArray.getBoolean(R.styleable.GoogleNavigationDrawer_list_footerClickable, true);
+            }
         }
 
         typedArray.recycle();
