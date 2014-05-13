@@ -336,48 +336,50 @@ public class GoogleNavigationDrawer extends DrawerLayout {
      * @param secondaryDrawableIds An integer array with the ids of the secondary sections icons. Must have the same length as secondarySections. May be null.
      */
     public void setListViewSections(String[] mainSections, String[] secondarySections, int[] mainDrawableIds, int[] secondaryDrawableIds) {
-        if(mListView == null) {
-            configureList();
-        }
-        GoogleNavigationDrawerAdapter adapter = new GoogleNavigationDrawerAdapter(getContext(), mainSections, secondarySections, mainDrawableIds, secondaryDrawableIds);
-
-        if(mListMainDividerHeight != -1) {
-            adapter.setMainDividerHeight(mListMainDividerHeight);
-        }
-
-        if(mListMainDivider != -1) {
-            adapter.setMainDividerColor(mListMainDivider);
-        }
-
-        if(mListMainDividerDrawable != null) {
-            adapter.setMainDividerDrawable(mListMainDividerDrawable);
-        }
-
-        if(mListSecondaryDividerHeight != -1) {
-            adapter.setSecondaryDividerHeight(mListSecondaryDividerHeight);
-        }
-
-        if(mListSecondaryDivider != -1) {
-            adapter.setSecondaryDividerColor(mListSecondaryDivider);
-        }
-
-        if(mListSecondaryDividerDrawable != null) {
-            adapter.setSecondaryDividerDrawable(mListSecondaryDividerDrawable);
-        }
-
-        if(mListPrimarySectionsBackgroundId >= 0) {
-            adapter.setMainBackResId(mListPrimarySectionsBackgroundId);
-        }
-
-        if(mListSecondarySectionsBackgroundId >= 0) {
-            adapter.setSecondaryBackResId(mListSecondarySectionsBackgroundId);
-        }
-
-        mListView.setAdapter(adapter);
-        if(mHeaderView != null && !isHeaderClickable()) {
-            check(1);
-        } else {
-            check(0);
+        if(!isInEditMode()) {
+            if(mListView == null) {
+                configureList();
+            }
+            GoogleNavigationDrawerAdapter adapter = new GoogleNavigationDrawerAdapter(getContext(), mainSections, secondarySections, mainDrawableIds, secondaryDrawableIds);
+    
+            if(mListMainDividerHeight != -1) {
+                adapter.setMainDividerHeight(mListMainDividerHeight);
+            }
+    
+            if(mListMainDivider != -1) {
+                adapter.setMainDividerColor(mListMainDivider);
+            }
+    
+            if(mListMainDividerDrawable != null) {
+                adapter.setMainDividerDrawable(mListMainDividerDrawable);
+            }
+    
+            if(mListSecondaryDividerHeight != -1) {
+                adapter.setSecondaryDividerHeight(mListSecondaryDividerHeight);
+            }
+    
+            if(mListSecondaryDivider != -1) {
+                adapter.setSecondaryDividerColor(mListSecondaryDivider);
+            }
+    
+            if(mListSecondaryDividerDrawable != null) {
+                adapter.setSecondaryDividerDrawable(mListSecondaryDividerDrawable);
+            }
+    
+            if(mListPrimarySectionsBackgroundId >= 0) {
+                adapter.setMainBackResId(mListPrimarySectionsBackgroundId);
+            }
+    
+            if(mListSecondarySectionsBackgroundId >= 0) {
+                adapter.setSecondaryBackResId(mListSecondarySectionsBackgroundId);
+            }
+    
+            mListView.setAdapter(adapter);
+            if(mHeaderView != null && !isHeaderClickable()) {
+                check(1);
+            } else {
+                check(0);
+            }
         }
     }
 
