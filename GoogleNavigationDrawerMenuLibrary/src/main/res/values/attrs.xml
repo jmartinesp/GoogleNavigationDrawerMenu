@@ -21,5 +21,11 @@
         <attr name="list_footerView" format="reference"></attr>
         <attr name="list_headerClickable" format="boolean"></attr>
         <attr name="list_footerClickable" format="boolean"></attr>
+        <attr name="list_background" format="reference|color"/>
+        <attr name="list_width" format="dimension"></attr>
+        <attr name="list_main_divider" format="reference|color"></attr>
+        <attr name="list_main_divider_height" format="dimension"></attr>
+        <attr name="list_secondary_divider" format="reference|color"></attr>
+        <attr name="list_secondary_divider_height" format="dimension"></attr>
     </declare-styleable>
 </resources>

@@ -16,10 +16,12 @@ package org.arasthel.googlenavdrawermenu.adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import org.arasthel.googlenavdrawermenu.R;
 import org.arasthel.googlenavdrawermenu.views.CheckableRelativeLayout;
@@ -37,6 +39,15 @@ public class GoogleNavigationDrawerAdapter extends BaseAdapter {
     private String[] mSecondarySections;
     private int[] mMainSectionsDrawableIds;
     private int[] mSecondarySectionsDrawableIds;
+
+    private int mainDividerHeight = -1;
+    private int secondaryDividerHeight = -1;
+
+    private int mainDividerColor = -1;
+    private int secondaryDividerColor = -1;
+
+    private Drawable mainDividerDrawable = null;
+    private Drawable secondaryDividerDrawable = null;
 
     private int mMainBackResId = R.drawable.main_section_background;
     private int mSecondaryBackResId = R.drawable.secondary_section_background;
@@ -109,10 +120,34 @@ public class GoogleNavigationDrawerAdapter extends BaseAdapter {
                     primaryHolder = new PrimaryHolder();
                     primaryHolder.primaryTextView = (CheckedTextView) view.findViewById(android.R.id.text1);
                     primaryHolder.primaryImageView = (ImageView) view.findViewById(android.R.id.icon);
+                    primaryHolder.bottomDivider = view.findViewById(R.id.google_nav_drawer_divider_bottom);
+                    if(mainDividerHeight != -1) {
+                        ((RelativeLayout.LayoutParams) primaryHolder.bottomDivider.getLayoutParams()).height = mainDividerHeight;
+                    }
+
+                    if(mainDividerColor != -1) {
+                        primaryHolder.bottomDivider.setBackgroundColor(mainDividerColor);
+                    }
+
+                    if(mainDividerDrawable != null) {
+                        int sdk = android.os.Build.VERSION.SDK_INT;
+                        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                            primaryHolder.bottomDivider.setBackgroundDrawable(mainDividerDrawable);
+                        } else {
+                            primaryHolder.bottomDivider.setBackground(mainDividerDrawable);
+                        }
+                    }
                     view.setTag(primaryHolder);
                 } else {
                     primaryHolder = (PrimaryHolder) view.getTag();
                 }
+
+                if(i == mMainSections.length-1) {
+                    primaryHolder.bottomDivider.setVisibility(View.GONE);
+                } else {
+                    primaryHolder.bottomDivider.setVisibility(View.VISIBLE);
+                }
+
                 primaryHolder.primaryTextView.setText((CharSequence) getItem(i));
                 if(((CheckableRelativeLayout) view).isChecked()) {
                     primaryHolder.primaryTextView.setTypeface(null, Typeface.BOLD);
@@ -136,12 +171,33 @@ public class GoogleNavigationDrawerAdapter extends BaseAdapter {
                     holder.secondaryTextView = (CheckedTextView) view.findViewById(android.R.id.text1);
                     holder.secondaryImageView = (ImageView) view.findViewById(android.R.id.icon);
                     holder.topDivider = view.findViewById(R.id.google_nav_drawer_divider_top);
+                    holder.bottomDivider = view.findViewById(R.id.google_nav_drawer_divider_bottom);
+                    if(secondaryDividerHeight != -1) {
+                        ((RelativeLayout.LayoutParams) holder.topDivider.getLayoutParams()).height = secondaryDividerHeight;
+                        ((RelativeLayout.LayoutParams) holder.bottomDivider.getLayoutParams()).height = secondaryDividerHeight;
+                    }
+
+                    if(secondaryDividerColor != -1) {
+                        holder.topDivider.setBackgroundColor(secondaryDividerColor);
+                        holder.bottomDivider.setBackgroundColor(secondaryDividerColor);
+                    }
+
+                    if(secondaryDividerDrawable != null) {
+                        int sdk = android.os.Build.VERSION.SDK_INT;
+                        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                            holder.topDivider.setBackgroundDrawable(secondaryDividerDrawable);
+                            holder.bottomDivider.setBackgroundDrawable(secondaryDividerDrawable);
+                        } else {
+                            holder.topDivider.setBackground(secondaryDividerDrawable);
+                            holder.bottomDivider.setBackground(secondaryDividerDrawable);
+                        }
+                    }
                     view.setTag(holder);
                 } else {
                     holder = (SecondaryHolder) view.getTag();
                 }
                 if(i != mMainSections.length) {
-                    holder.topDivider.setVisibility(View.INVISIBLE);
+                    holder.topDivider.setVisibility(View.GONE);
                 } else {
                     holder.topDivider.setVisibility(View.VISIBLE);
                 }
@@ -191,15 +247,21 @@ public class GoogleNavigationDrawerAdapter extends BaseAdapter {
         return mSecondarySectionsDrawableIds[position];
     }
 
+    public void setSecondaryDividerHeight(int height) {
+        this.secondaryDividerHeight = height;
+    }
+
     private class PrimaryHolder {
         public CheckedTextView primaryTextView;
         public ImageView primaryImageView;
+        public View bottomDivider;
     }
 
     private class SecondaryHolder {
         public CheckedTextView secondaryTextView;
         public ImageView secondaryImageView;
         public View topDivider;
+        public View bottomDivider;
     }
 
     public String[] getMainSections() {
@@ -248,5 +310,45 @@ public class GoogleNavigationDrawerAdapter extends BaseAdapter {
 
     public void setSecondaryBackResId(int mSecondaryBackResId) {
         this.mSecondaryBackResId = mSecondaryBackResId;
+    }
+
+    public Drawable getSecondaryDividerDrawable() {
+        return secondaryDividerDrawable;
+    }
+
+    public void setSecondaryDividerDrawable(Drawable secondaryDividerDrawable) {
+        this.secondaryDividerDrawable = secondaryDividerDrawable;
+    }
+
+    public int getMainDividerHeight() {
+        return mainDividerHeight;
+    }
+
+    public void setMainDividerHeight(int mainDividerHeight) {
+        this.mainDividerHeight = mainDividerHeight;
+    }
+
+    public Drawable getMainDividerDrawable() {
+        return mainDividerDrawable;
+    }
+
+    public void setMainDividerDrawable(Drawable mainDividerDrawable) {
+        this.mainDividerDrawable = mainDividerDrawable;
+    }
+
+    public int getMainDividerColor() {
+        return mainDividerColor;
+    }
+
+    public void setMainDividerColor(int mainDividerColor) {
+        this.mainDividerColor = mainDividerColor;
+    }
+
+    public int getSecondaryDividerColor() {
+        return secondaryDividerColor;
+    }
+
+    public void setSecondaryDividerColor(int secondaryDividerColor) {
+        this.secondaryDividerColor = secondaryDividerColor;
     }
 }

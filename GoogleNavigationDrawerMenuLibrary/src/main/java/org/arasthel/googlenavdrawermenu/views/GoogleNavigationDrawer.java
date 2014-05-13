@@ -17,6 +17,7 @@ package org.arasthel.googlenavdrawermenu.views;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.widget.DrawerLayout;
@@ -42,6 +43,20 @@ public class GoogleNavigationDrawer extends DrawerLayout {
     private int mListPaddingRight = 0;
 
     private int mDrawerGravity = GravityCompat.START;
+
+    private int mListBackgroundColor = -1;
+    private Drawable mListBackground = null;
+    private int mListPrimarySectionsBackgroundId = -1;
+    private int mListSecondarySectionsBackgroundId = -1;
+
+    private Drawable mListMainDividerDrawable = null;
+    private Drawable mListSecondaryDividerDrawable = null;
+
+    private float mListWidth = -1;
+    private int mListMainDividerHeight = -1;
+    private int mListSecondaryDividerHeight = -1;
+    private int mListMainDivider = -1;
+    private int mListSecondaryDivider = -1;
 
     private OnNavigationSectionSelected mSelectionListener;
 
@@ -91,6 +106,11 @@ public class GoogleNavigationDrawer extends DrawerLayout {
         setListViewSections(mMainSections, mSecondarySections, mMainSectionsDrawableIds, mSecondarySectionsDrawableIds);
     }
 
+    /**
+     * Add the feature to set the titles automatically to the section's names
+     * @param activity The activity whose title will change or not
+     * @param shouldChangeTitle True if it should change
+     */
     public void setShouldChangeTitle(Activity activity, boolean shouldChangeTitle) {
         if (shouldChangeTitle)
             mActivity = activity;
@@ -100,10 +120,95 @@ public class GoogleNavigationDrawer extends DrawerLayout {
     }
 
     /**
+     * Change list background to the drawable.
+     * @param d Drawable to set as background
+     */
+    public void setListBackground(Drawable d) {
+        mListBackground = d;
+        int sdk = android.os.Build.VERSION.SDK_INT;
+        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            mListView.setBackgroundDrawable(mListBackground);
+        } else {
+            mListView.setBackground(mListBackground);
+        }
+    }
+
+    /**
+     * Set list background to the resource with this id
+     * @param backgroundId Id of the background
+     */
+    public void setListBackground(int backgroundId) {
+        Drawable d = getResources().getDrawable(backgroundId);
+        setBackground(d);
+    }
+
+    /**
+     * Set list backround to the provided color
+     * @param color
+     */
+    public void setListBackgroundColor(int color) {
+        mListView.setBackgroundColor(color);
+    }
+
+    /**
+     * Change list width
+     * @param width
+     */
+    public void setWidth(int width) {
+        mListWidth = width;
+        ((LayoutParams) mListView.getLayoutParams()).width = width;
+        mListView.requestLayout();
+    }
+
+    /**
+     * Set the main list divider drawable to the provided one
+     * @param listDivider
+     */
+    public void setMainListDivider(Drawable listDivider) {
+        this.mListMainDividerDrawable = listDivider;
+        mListView.setDivider(listDivider);
+    }
+
+    public void setMainListDividerHeight(int height) {
+        this.mListMainDividerHeight = height;
+        mListView.setDividerHeight(height);
+    }
+
+    /**
+     * Set the main list divider drawable to the provided one
+     * @param listDivider
+     */
+    public void setSecondaryListDivider(Drawable listDivider) {
+        this.mListSecondaryDividerDrawable = listDivider;
+    }
+
+    public void setSecondaryListDividerHeight(int height) {
+        this.mListSecondaryDividerHeight = height;
+    }
+
+    /**
      * Configure View with custom attrs
      * @param typedArray - A TypedArray
      */
     public void configureWithTypedArray(TypedArray typedArray) {
+        mListBackground = typedArray.getDrawable(R.styleable.GoogleNavigationDrawer_list_background);
+
+        mListWidth = typedArray.getDimension(R.styleable.GoogleNavigationDrawer_list_width, -1);
+
+        mListMainDividerHeight = (int) typedArray.getDimension(R.styleable.GoogleNavigationDrawer_list_main_divider_height, -1);
+        mListSecondaryDividerHeight = (int) typedArray.getDimension(R.styleable.GoogleNavigationDrawer_list_secondary_divider_height, -1);
+
+        mListMainDividerDrawable = typedArray.getDrawable(R.styleable.GoogleNavigationDrawer_list_main_divider);
+        mListSecondaryDividerDrawable = typedArray.getDrawable(R.styleable.GoogleNavigationDrawer_list_secondary_divider);
+
+        if(mListMainDividerDrawable == null) {
+            mListMainDivider = typedArray.getColor(R.styleable.GoogleNavigationDrawer_list_main_divider, -1);
+        }
+
+        if(mListSecondaryDividerDrawable == null) {
+            mListSecondaryDivider = typedArray.getColor(R.styleable.GoogleNavigationDrawer_list_secondary_divider, -1);
+        }
+
         mListPaddingTop = typedArray.getDimensionPixelSize(R.styleable.GoogleNavigationDrawer_list_paddingTop, mListPaddingTop);
         mListPaddingBottom = typedArray.getDimensionPixelSize(R.styleable.GoogleNavigationDrawer_list_paddingBottom, mListPaddingBottom);
         mListPaddingRight = typedArray.getDimensionPixelSize(R.styleable.GoogleNavigationDrawer_list_paddingRight, mListPaddingRight);
@@ -114,46 +219,53 @@ public class GoogleNavigationDrawer extends DrawerLayout {
         mMainSections = Utils.convertToStringArray(typedArray.getTextArray(R.styleable.GoogleNavigationDrawer_list_mainSectionsEntries));
         mSecondarySections = Utils.convertToStringArray(typedArray.getTextArray(R.styleable.GoogleNavigationDrawer_list_secondarySectionsEntries));
 
+        mListPrimarySectionsBackgroundId = typedArray.getResourceId(R.styleable.GoogleNavigationDrawer_list_mainSectionsBackground, -1);
+        mListSecondarySectionsBackgroundId = typedArray.getResourceId(R.styleable.GoogleNavigationDrawer_list_secondarySectionsBackground, -1);
+
         int mainSectDrawableId = typedArray.getResourceId(R.styleable.GoogleNavigationDrawer_list_mainSectionsDrawables, -1);
 
-        if(mMainSections != null) {
-            mMainSectionsDrawableIds = new int[mMainSections.length];
+        if(!isInEditMode()) {
 
-            if (mainSectDrawableId != -1) {
-                TypedArray mainSectTypedArray = getResources().obtainTypedArray(mainSectDrawableId);
-                for (int i = 0; i < mMainSections.length; i++) {
-                    mMainSectionsDrawableIds[i] = mainSectTypedArray.getResourceId(i, 0);
+            if (mMainSections != null) {
+                mMainSectionsDrawableIds = new int[mMainSections.length];
+
+                if (mainSectDrawableId != -1) {
+                    TypedArray mainSectTypedArray = getResources().obtainTypedArray(mainSectDrawableId);
+                    for (int i = 0; i < mMainSections.length; i++) {
+                        mMainSectionsDrawableIds[i] = mainSectTypedArray.getResourceId(i, 0);
+                    }
+                    mainSectTypedArray.recycle();
                 }
-                mainSectTypedArray.recycle();
             }
-        }
 
-        int secondarySectDrawableId = typedArray.getResourceId(R.styleable.GoogleNavigationDrawer_list_secondarySectionsDrawables, -1);
+            int secondarySectDrawableId = typedArray.getResourceId(R.styleable.GoogleNavigationDrawer_list_secondarySectionsDrawables, -1);
 
-        if(mSecondarySections != null) {
-            mSecondarySectionsDrawableIds = new int[mSecondarySections.length];
+            if (mSecondarySections != null) {
+                mSecondarySectionsDrawableIds = new int[mSecondarySections.length];
 
-            if (secondarySectDrawableId != -1) {
-                TypedArray secondarySectTypedArray = getResources().obtainTypedArray(secondarySectDrawableId);
-                for (int i = 0; i < mSecondarySections.length; i++) {
-                    mSecondarySectionsDrawableIds[i] = secondarySectTypedArray.getResourceId(i, 0);
+                if (secondarySectDrawableId != -1) {
+                    TypedArray secondarySectTypedArray = getResources().obtainTypedArray(secondarySectDrawableId);
+                    for (int i = 0; i < mSecondarySections.length; i++) {
+                        mSecondarySectionsDrawableIds[i] = secondarySectTypedArray.getResourceId(i, 0);
+                    }
+                    secondarySectTypedArray.recycle();
                 }
-                secondarySectTypedArray.recycle();
             }
-        }
 
-        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        int headerViewId = typedArray.getResourceId(R.styleable.GoogleNavigationDrawer_list_headerView, -1);
-        if(headerViewId != -1) {
-            mHeaderView = inflater.inflate(headerViewId, null);
-            mHeaderClickable = typedArray.getBoolean(R.styleable.GoogleNavigationDrawer_list_headerClickable, true);
-        }
+            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        int footerViewId = typedArray.getResourceId(R.styleable.GoogleNavigationDrawer_list_footerView, -1);
-        if(footerViewId != -1) {
-            mFooterView = inflater.inflate(footerViewId, null);
-            mFooterClickable = typedArray.getBoolean(R.styleable.GoogleNavigationDrawer_list_footerClickable, true);
+            int headerViewId = typedArray.getResourceId(R.styleable.GoogleNavigationDrawer_list_headerView, -1);
+            if (headerViewId != -1) {
+                mHeaderView = inflater.inflate(headerViewId, null);
+                mHeaderClickable = typedArray.getBoolean(R.styleable.GoogleNavigationDrawer_list_headerClickable, true);
+            }
+
+            int footerViewId = typedArray.getResourceId(R.styleable.GoogleNavigationDrawer_list_footerView, -1);
+            if (footerViewId != -1) {
+                mFooterView = inflater.inflate(footerViewId, null);
+                mFooterClickable = typedArray.getBoolean(R.styleable.GoogleNavigationDrawer_list_footerClickable, true);
+            }
         }
 
         typedArray.recycle();
@@ -166,6 +278,18 @@ public class GoogleNavigationDrawer extends DrawerLayout {
     private void configureList() {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mListView = (ListView) inflater.inflate(R.layout.navigation_list, this, false);
+        if(mListWidth >= 0) {
+            ((LayoutParams) mListView.getLayoutParams()).width = (int) mListWidth;
+        }
+
+        if(mListBackgroundColor != -1) {
+            setListBackgroundColor(mListBackgroundColor);
+        }
+
+        if(mListBackground != null) {
+            setListBackground(mListBackground);
+        }
+
         mListView.setPadding(mListPaddingLeft, mListPaddingTop, mListPaddingRight, mListPaddingBottom);
         ((DrawerLayout.LayoutParams) mListView.getLayoutParams()).gravity = mDrawerGravity;
         if(mHeaderView != null) {
@@ -216,6 +340,39 @@ public class GoogleNavigationDrawer extends DrawerLayout {
             configureList();
         }
         GoogleNavigationDrawerAdapter adapter = new GoogleNavigationDrawerAdapter(getContext(), mainSections, secondarySections, mainDrawableIds, secondaryDrawableIds);
+
+        if(mListMainDividerHeight != -1) {
+            adapter.setMainDividerHeight(mListMainDividerHeight);
+        }
+
+        if(mListMainDivider != -1) {
+            adapter.setMainDividerColor(mListMainDivider);
+        }
+
+        if(mListMainDividerDrawable != null) {
+            adapter.setMainDividerDrawable(mListMainDividerDrawable);
+        }
+
+        if(mListSecondaryDividerHeight != -1) {
+            adapter.setSecondaryDividerHeight(mListSecondaryDividerHeight);
+        }
+
+        if(mListSecondaryDivider != -1) {
+            adapter.setSecondaryDividerColor(mListSecondaryDivider);
+        }
+
+        if(mListSecondaryDividerDrawable != null) {
+            adapter.setSecondaryDividerDrawable(mListSecondaryDividerDrawable);
+        }
+
+        if(mListPrimarySectionsBackgroundId >= 0) {
+            adapter.setMainBackResId(mListPrimarySectionsBackgroundId);
+        }
+
+        if(mListSecondarySectionsBackgroundId >= 0) {
+            adapter.setSecondaryBackResId(mListSecondarySectionsBackgroundId);
+        }
+
         mListView.setAdapter(adapter);
         if(mHeaderView != null && !isHeaderClickable()) {
             check(1);
