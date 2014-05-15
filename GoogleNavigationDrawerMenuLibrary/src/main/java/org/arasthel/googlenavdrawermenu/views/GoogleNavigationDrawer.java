@@ -190,8 +190,8 @@ public class GoogleNavigationDrawer extends DrawerLayout {
 	 * Set the behavior of the secondary sections
 	 * @param isSecondarySectionsClickable
 	 */
-	public void setIsSecondarySectionsClickable(boolean isSecondarySectionsClickable) {
-		this.isSecondarySectionsClickable = IsSecondarySectionsClickable;
+    public void setIsSecondarySectionsClickable(boolean isSecondarySectionsClickable) {
+        this.isSecondarySectionsClickable = IsSecondarySectionsClickable;
 	}
 
     /**
@@ -274,7 +274,7 @@ public class GoogleNavigationDrawer extends DrawerLayout {
                 mFooterClickable = typedArray.getBoolean(R.styleable.GoogleNavigationDrawer_list_footerClickable, true);
             }
 			
-			mSecondarySectionsClickable = typedArray.getBoolean(R.styleable.GoogleNavigationDrawer_list_secondarySectionsCheckable, true);
+            mSecondarySectionsClickable = typedArray.getBoolean(R.styleable.GoogleNavigationDrawer_list_secondarySectionsCheckable, true);
         }
 
         typedArray.recycle();
@@ -320,8 +320,8 @@ public class GoogleNavigationDrawer extends DrawerLayout {
                 if(mFooterView != null && i == mListView.getCount()-1 && !mFooterClickable) {
                     return;
                 }
-				if (mSecondarySectionsClickable || mListView.getAdapter().getItemViewType(i) == GoogleNavigationDrawerAdapter.TYPE_MAIN)
-					check(i);
+                if (mSecondarySectionsClickable || mListView.getAdapter().getItemViewType(i) == GoogleNavigationDrawerAdapter.TYPE_MAIN)
+                    check(i);
 
                 if(mSelectionListener != null) {
                     mSelectionListener.onSectionSelected(view, i, l);
