@@ -71,6 +71,7 @@ public class GoogleNavigationDrawer extends DrawerLayout {
 
     private boolean mHeaderClickable = true;
     private boolean mFooterClickable = true;
+	private boolean mSecondarySectionsClickable = true;
 
     private int checkPosition;
 
@@ -185,6 +186,13 @@ public class GoogleNavigationDrawer extends DrawerLayout {
     public void setSecondaryListDividerHeight(int height) {
         this.mListSecondaryDividerHeight = height;
     }
+	/**
+	 * Set the behavior of the secondary sections
+	 * @param isSecondarySectionsClickable
+	 */
+	public void setIsSecondarySectionsClickable(boolean isSecondarySectionsClickable) {
+		this.isSecondarySectionsClickable = IsSecondarySectionsClickable;
+	}
 
     /**
      * Configure View with custom attrs
@@ -252,7 +260,6 @@ public class GoogleNavigationDrawer extends DrawerLayout {
                 }
             }
 
-
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             int headerViewId = typedArray.getResourceId(R.styleable.GoogleNavigationDrawer_list_headerView, -1);
@@ -266,6 +273,8 @@ public class GoogleNavigationDrawer extends DrawerLayout {
                 mFooterView = inflater.inflate(footerViewId, null);
                 mFooterClickable = typedArray.getBoolean(R.styleable.GoogleNavigationDrawer_list_footerClickable, true);
             }
+			
+			mSecondarySectionsClickable = typedArray.getBoolean(R.styleable.GoogleNavigationDrawer_list_secondarySectionsCheckable, true);
         }
 
         typedArray.recycle();
@@ -311,8 +320,8 @@ public class GoogleNavigationDrawer extends DrawerLayout {
                 if(mFooterView != null && i == mListView.getCount()-1 && !mFooterClickable) {
                     return;
                 }
-
-                check(i);
+				if (mSecondarySectionsClickable || mListView.getAdapter().getItemViewType(i) == GoogleNavigationDrawerAdapter.TYPE_MAIN)
+					check(i);
 
                 if(mSelectionListener != null) {
                     mSelectionListener.onSectionSelected(view, i, l);

@@ -150,6 +150,7 @@ drawer:list_headerView="layout"
 drawer:list_footerView="layout"
 drawer:list_headerClickable="boolean" (default is true)
 drawer:list_footerClickable="boolean" (default is true)
+drawer:list_secondarySectionsCheckable="boolean" (default is true)
 drawer:list_mainSectionsBackground="drawable"
 drawer:list_secondarySectionsBackground="drawable"
 drawer:list_width="dimension"
