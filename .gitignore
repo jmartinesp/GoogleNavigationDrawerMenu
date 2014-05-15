@@ -3,7 +3,6 @@
 /.idea
 .DS_Store
 GoogleNavigationDrawerMenu.iml
-maven_push.gradle
 gradle
 gradlew
 gradlew.bat
