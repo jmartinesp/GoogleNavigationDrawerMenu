@@ -7,3 +7,5 @@ GoogleNavigationDrawerMenu.iml
 gradle
 gradlew
 gradlew.bat
+
+*.iml
