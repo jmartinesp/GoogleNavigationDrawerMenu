@@ -14,6 +14,7 @@
 
 package org.arasthel.googlenavdrawermenu.adapters;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -108,6 +109,7 @@ public class GoogleNavigationDrawerAdapter extends BaseAdapter {
         return i;
     }
 
+    @TargetApi(16)
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         int icon = -1;

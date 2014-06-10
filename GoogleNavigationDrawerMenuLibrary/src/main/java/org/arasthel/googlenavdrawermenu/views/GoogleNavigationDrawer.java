@@ -14,6 +14,7 @@
 
 package org.arasthel.googlenavdrawermenu.views;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -124,6 +125,7 @@ public class GoogleNavigationDrawer extends DrawerLayout {
      * Change list background to the drawable.
      * @param d Drawable to set as background
      */
+    @TargetApi(16)
     public void setListBackground(Drawable d) {
         mListBackground = d;
         int sdk = android.os.Build.VERSION.SDK_INT;
@@ -138,6 +140,7 @@ public class GoogleNavigationDrawer extends DrawerLayout {
      * Set list background to the resource with this id
      * @param backgroundId Id of the background
      */
+    @TargetApi(16)
     public void setListBackground(int backgroundId) {
         Drawable d = getResources().getDrawable(backgroundId);
         setBackground(d);
