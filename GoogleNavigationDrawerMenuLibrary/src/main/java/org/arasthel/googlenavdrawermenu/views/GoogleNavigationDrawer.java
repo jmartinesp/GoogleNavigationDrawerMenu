@@ -191,7 +191,7 @@ public class GoogleNavigationDrawer extends DrawerLayout {
 	 * @param isSecondarySectionsClickable
 	 */
     public void setIsSecondarySectionsClickable(boolean isSecondarySectionsClickable) {
-        this.isSecondarySectionsClickable = IsSecondarySectionsClickable;
+        this.mSecondarySectionsClickable = isSecondarySectionsClickable;
 	}
 
     /**

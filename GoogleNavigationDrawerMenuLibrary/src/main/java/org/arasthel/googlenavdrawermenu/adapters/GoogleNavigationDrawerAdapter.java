@@ -32,7 +32,7 @@ import org.arasthel.googlenavdrawermenu.views.CheckedTextView;
  */
 public class GoogleNavigationDrawerAdapter extends BaseAdapter {
 
-    private static final int TYPE_MAIN = 0;
+    public static final int TYPE_MAIN = 0;
     private static final int TYPE_SECONDARY = 1;
 
     private String[] mMainSections;
