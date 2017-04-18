@@ -27,7 +27,7 @@ With GoogleNavigationDrawerMenu you can:
 
 ## How to use
 
-###1. Include the library:
+### 1. Include the library:
 
   **Manually (Option A):**
 
@@ -61,9 +61,9 @@ Declare it into your build.gradle
         compile 'com.arasthel:gnavdrawer-library:+'
     }
 
-###2. Use class in XML or code:
+### 2. Use class in XML or code:
 
-####Example of how to use it on an XML code:
+#### Example of how to use it on an XML code:
 
 ```xml
 <org.arasthel.googlenavdrawermenu.views.GoogleNavigationDrawer
@@ -91,7 +91,7 @@ You may think *'Ok, so where's the menu?'*. Well, the GoogleNavigationDrawer cla
 
 All the `drawer:*` attributes are optional, but if you don't provide any entries you will have to do it later in code with `drawer.setListViewSections(...)`.
 
-####Using GoogleNavigationDrawer in Java Code:
+#### Using GoogleNavigationDrawer in Java Code:
 
 ```java
 ViewGroup container = (ViewGroup) findViewById(R.id.container);
@@ -112,7 +112,7 @@ drawer.addView(contentView, 0);
 
 GoogleNavigationDrawer extends DrawerLayout. This means you can use DrawerLayout methods and set a DrawerListener to it.
 
-###3. Handling selection, opening and closing of the menu:
+### 3. Handling selection, opening and closing of the menu:
 
  As you cannot access the inner ListView to ensure encapsulation, additional methods have been provided so you can do it by code. This methods are:
 
@@ -135,7 +135,7 @@ You can also easily tell the drawer to change your Activity title based on the s
 public void setShouldChangeTitle(Activity activity, boolean shouldChangeTitle);
 ```
 
-###4. Customizing the inner ListView:
+### 4. Customizing the inner ListView:
 
  Finally, customization. The main XML attributes of the class are the following:
 
